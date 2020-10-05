@@ -6,10 +6,10 @@ A new airline wants to start running commercial passenger flights. In order to a
 **Tasks:** *(detailed [here](./Airport%20Project.pdf))*
 
 - [x] Read `Airports.txt`
-- [ ] Display a menu
-- [ ] Quit
-- [ ] Enter airport details
-- [ ] Enter flight details
+- [x] Display a menu
+- [x] Quit
+- [x] Enter airport details
+- [x] Enter flight details
 - [ ] Enter price plan/profit
 - [ ] Clear data
 
