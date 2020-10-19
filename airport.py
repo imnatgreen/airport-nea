@@ -1,9 +1,11 @@
-#####################################
-##                                 ##
-##   Airport NEA by Nathan Green   ##
-##                                 ##
-#####################################
+######################################################
+##                                                  ##
+##           Airport NEA by Nathan Green            ##
+##   https://github.com/nathangreen06/airport-nea   ##
+##                                                  ##
+######################################################
 
+# Import required modules
 import csv
 from time import sleep
 
@@ -18,14 +20,14 @@ aircrafts = [['Medium narrow body', 8, 2650, 180, 8],
              ['Large narrow body', 7, 5600, 220, 10],
              ['Medium wide body', 5, 4050, 406, 14]]
 
-airportDetails = None
+airportDetails = None  # Initialise with empty values
 flightDetails = None
 
 
 # Create menu
 def mainMenu():
     global airportDetails  # Open as global for persistance
-    global flightDetails  #  once menu is finished
+    global flightDetails  #               once menu has run
     print("\n=========")
     print("Main Menu")
     print("=========")
@@ -52,10 +54,10 @@ def mainMenu():
         getPricePlan(airportDetails, flightDetails)
     elif option == 4:
         print("Clearing data...")
-        airportDetails = None
+        airportDetails = None  # Reset to initial values
         flightDetails = None
     elif option == 5:
-        return "quit"
+        return "quit"  # Returning 'quit' exits the main program loop
 
 
 def getAirportDetails(airportData):
@@ -86,12 +88,13 @@ def getFlightDetails(aircraftData):
         option = input("Please choose an option: [1-" +
                        str(len(aircraftData)) +
                        "] ")  # Dynamically change max input
-        option = int(option[0])
-        if option < 1 or option > len(aircraftData):
+        option = int(option)
+        if option < 1 or option > len(
+                aircraftData):  # Handle input out of range
             raise ValueError
     except:
         print("Input was invalid. Returning to menu.")
-        return None
+        return None  # Leave the function
 
     labels = [
         "Type", "Running cost/seat/100km", "Max flight range (km)",
@@ -102,7 +105,7 @@ def getFlightDetails(aircraftData):
     for count, detail in enumerate(aircraft):  # Loop over selected aircraft
         print(labels[count] + ": " + str(detail))  # Print details of aircraft
 
-    lowHigh = ''
+    lowHigh = ''  # Must be declared to handle exceptions like Ctrl+C
     try:
         option = input("\nEnter number of 1st class seats: (" +
                        str(aircraft[4]) + " - " + str(int(aircraft[3] / 2)) +
@@ -120,7 +123,7 @@ def getFlightDetails(aircraftData):
         print("No. of standard seats: " + str(standardSeats))
         return [aircraft, firstSeats, standardSeats]  # Return for use later
     except:  # Handle exceptions
-        if lowHigh == '':
+        if lowHigh == '':  # Handle other errors than too high/low
             print("Input was invalid. Returning to menu.")
         else:
             print("Value entered was too " + lowHigh + ". Returning to menu.")
@@ -134,6 +137,7 @@ def getPricePlan(airportDetails, flightDetails):
         if flightDetails == None:
             print("Flight details weren't entered.")
             raise ValueError
+        # Tells the next line where to look for the flight distance
         ukAirportCheck = 2 if airportDetails[0] == 'LPL' else 3
         flightDistance = int(airportDetails[1][ukAirportCheck])
         if flightDetails[0][2] < flightDistance:
@@ -147,6 +151,7 @@ def getPricePlan(airportDetails, flightDetails):
             input("Enter the price of a standard-class seat: £"))
         firstSeatPrice = float(
             input("Enter the price of a first-class seat: £"))
+        # Calculate costs with given formulae
         costPerSeat = flightDetails[0][1] * flightDistance / 100
         flightCost = costPerSeat * (flightDetails[1] + flightDetails[2])
         flightIncome = (flightDetails[1] *
