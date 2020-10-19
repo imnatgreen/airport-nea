@@ -10,8 +10,8 @@ A new airline wants to start running commercial passenger flights. In order to a
 - [x] Quit
 - [x] Enter airport details
 - [x] Enter flight details
-- [ ] Enter price plan/profit
-- [ ] Clear data
+- [x] Enter price plan/profit
+- [x] Clear data
 
 ---
 
